@@ -1,23 +1,41 @@
 <include a CircleCI status badge, here>
 
-## Project Overview
+# Udacity DevOps Nanodegree Project 5: Microservices
 
-In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
-
-You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
-
-
-# set up python environment
+## set up python environment
 After cloning the starter git create a venv (Windows):
 
 `python3 -m venv /devops`  
 `activate devops`
+
+To prevent pylint error create environment with conda and upgrade pylint
+`conda create --name py37 python=3.7.2`
+`pip upgrade pylint`
+
+## Lint dockerfile  
+To test the dockerfile and python app with hadolint and pylint:  
+`make lint`
+
+## Build and run image  
+Change permissions and run shell script:  
+`chmod +x docker.sh` 
+`./run_docker.sh`  
+
+## test image
+` ./make_prediction.sh`
+
+## Upload docker image
+Upload the image to dockerhub:
+`./upload_docker.sh`
+
 
 ### Project Tasks
 
 Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
 * Test your project code using linting
 * Complete a Dockerfile to containerize this application
+On windows start docker client, have it disable Virtualbox, restart PC and build from dockerfile:
+`docker build .`
 * Deploy your containerized application using Docker and make a prediction
 * Improve the log statements in the source code for this application
 * Configure Kubernetes and create a Kubernetes cluster
