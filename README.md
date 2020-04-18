@@ -8,9 +8,10 @@ You are given a pre-trained, `sklearn` model that has been trained to predict ho
 
 
 # set up python environment
-After cloning the starter git:
-`python3 -m venv ~/.devops`  
-`source ~/.devops/bin/activate`
+After cloning the starter git create a venv (Windows):
+
+`python3 -m venv /devops`  
+`activate devops`
 
 ### Project Tasks
 
