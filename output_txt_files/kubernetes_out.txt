@@ -1,4 +1,22 @@
 <paste log output from Kubernetes-mediated prediction, here>
+#run_kubernetes.sh output:
+C:\Users\Jan>kubectl create deployment mlapp --image=jansdockerhub/mlapp
+deployment.apps/mlapp created
+
+C:\Users\Jan>kubectl get pods
+NAME                     READY   STATUS    RESTARTS   AGE
+mlapp-599954dbf7-x2fpz   1/1     Running   0          9m36s
+
+C:\Users\Jan>kubectl expose deployment mlapp --type=LoadBalancer --port=80
+service/mlapp exposed
+
+C:\Users\Jan>kubectl port-forward deployment/mlapp 8000:80
+Forwarding from 127.0.0.1:8000 -> 80
+Forwarding from [::1]:8000 -> 80
+Handling connection for 8000
+
+
+#make_prediction output:
 Port: 8000
 {
   "prediction": [

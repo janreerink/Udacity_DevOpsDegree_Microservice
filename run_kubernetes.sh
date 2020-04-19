@@ -8,12 +8,13 @@ dockerpath=jansdockerhub/mlapp
 
 # Step 2
 # Run the Docker Hub container with kubernetes
-kubectl run mlapp --image=$dockerpath --port=80 
-
+#minikubectl run mlapp --image=$dockerpath --port=80 
+kubectl create deployment mlapp --image=$dockerpath
+kubectl expose deployment mlapp --type=LoadBalancer --port=80
 # Step 3:
 # List kubernetes pods
 kubectl get pods
 
 # Step 4:
 # Forward the container port to a host
-kubectl port-forward mlapp 8000:80
+kubectl port-forward deployment/mlapp 8000:80
