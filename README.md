@@ -1,4 +1,4 @@
-<include a CircleCI status badge, here>
+[![CircleCI](https://circleci.com/gh/janreerink/Udacity_DevOpsDegree_Microservice.svg?style=svg)](https://circleci.com/gh/janreerink/Udacity_DevOpsDegree_Microservice)
 
 # Udacity DevOps Nanodegree Project 5: Microservices
 In this project a docker imagine containing a Flask API for a sci-kit learn ML model is run on Kubernetes. The repository contains:  
@@ -61,7 +61,8 @@ Run make_prediction.sh again to test the deployment, results stored in output_tx
 
 ## Circleci integration  
 Set up hidden folder and config file as described here. https://circleci.com/blog/triggering-trusted-ci-jobs-on-untrusted-forks/  
-
+On CircleCi link the Github repo; indicate that configuration was added manually.  
+Note: fix identation of the yaml and add pylint to requirements for circleci build to pass.
 
 ## Clean-up
 Stop and delte Kubernetes cluster:  
