@@ -1,6 +1,17 @@
 <include a CircleCI status badge, here>
 
 # Udacity DevOps Nanodegree Project 5: Microservices
+In this project a docker imagine containing a Flask API for a sci-kit learn ML model is run on Kubernetes. The repository contains:  
+- app.py: the Flask API and sci-kit model
+- Makefile: a makefile to install requirements and lint the dockerfile
+- Dockerfile: a dockerfile that builds the image based on app.py, install required packages and opens a port
+- several batch files: to build and run the docker image, upload it and to send an example json to the Flask API
+- requirements.txt with required packages
+- circleci-folder with configuration.yml for Circleci integration
+- model_data-folder
+- output_txt_files folder containing sample logs from Docker and Kubernetes
+
+# Setup and run
 
 ## set up python environment
 After cloning the starter git create a venv (Windows):
@@ -21,6 +32,10 @@ Change permissions and run shell script:
 `chmod +x docker.sh` 
 `./run_docker.sh`  
 
+Note: on windows start docker client, have it disable Virtualbox, restart PC and build from dockerfile:
+`docker build .`
+
+
 ## test image
 ` ./make_prediction.sh`
 
@@ -28,40 +43,27 @@ Change permissions and run shell script:
 Upload the image to dockerhub:
 `./upload_docker.sh`
 
+## Start Minikube cluster
+Note: on windows disable Hyper-V with admin-console:  
+`dism.exe /Online /Disable-Feature:Microsoft-Hyper-V`
+Start minikube:  
+`minikube start`
 
-### Project Tasks
+Check if cluster started correctly:  
+`kubectl config view`
 
-Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
-* Test your project code using linting
-* Complete a Dockerfile to containerize this application
-On windows start docker client, have it disable Virtualbox, restart PC and build from dockerfile:
-`docker build .`
-* Deploy your containerized application using Docker and make a prediction
-* Improve the log statements in the source code for this application
-* Configure Kubernetes and create a Kubernetes cluster
-* Deploy a container using Kubernetes and make a prediction
-* Upload a complete Github repo with CircleCI to indicate that your code has been tested
+## Deploy container on Kubernetes
+Chmod +x for run_kubernetes.sh and:  
+`./run_kubernetes.sh`
+to serve the docker container on the Kunerbetes cluster, list running pods and forward the port.
 
-You can find a detailed [project rubric, here](https://review.udacity.com/#!/rubrics/2576/view).
+Run make_prediction.sh again to test the deployment, results stored in output_txt_files\kubernetes_out.txt.
 
-**The final implementation of the project will showcase your abilities to operationalize production microservices.**
+## Circleci integration  
+Set up hidden folder and config file as described here. https://circleci.com/blog/triggering-trusted-ci-jobs-on-untrusted-forks/  
 
----
 
-## Setup the Environment
-
-* Create a virtualenv and activate it
-* Run `make install` to install the necessary dependencies
-
-### Running `app.py`
-
-1. Standalone:  `python app.py`
-2. Run in Docker:  `./run_docker.sh`
-3. Run in Kubernetes:  `./run_kubernetes.sh`
-
-### Kubernetes Steps
-
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
+## Clean-up
+Stop and delte Kubernetes cluster:  
+`minikube stop`  
+`minikube delete`
